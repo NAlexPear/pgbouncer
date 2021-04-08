@@ -69,9 +69,6 @@ dist_doc_DATA = README.md NEWS.md etc/pgbouncer.ini etc/userlist.txt
 
 DISTCLEANFILES = config.mak config.status lib/usual/config.h config.log
 
-DIST_SUBDIRS = doc test
-dist_man_MANS = doc/pgbouncer.1 doc/pgbouncer.5
-
 # files in tgz
 EXTRA_DIST = AUTHORS COPYRIGHT Makefile config.mak.in config.sub config.guess \
 	     install-sh autogen.sh configure configure.ac \
@@ -150,11 +147,3 @@ $(w32zip): pgbouncer.exe pgbevent.dll etc/pgbouncer.ini etc/userlist.txt README.
 .PHONY: tags
 tags:
 	ctags src/*.c include/*.h lib/usual/*.[ch] lib/usual/*/*.[ch]
-
-htmls:
-	for f in *.md doc/*.md; do \
-		mkdir -p html && $(PANDOC) $$f -o html/`basename $$f`.html; \
-	done
-
-doc/pgbouncer.1 doc/pgbouncer.5:
-	$(MAKE) -C doc
